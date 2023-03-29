@@ -40,7 +40,7 @@ const PluginPage: NextPageWithLayout<PluginPageProps> = ({ plugin, name }) => {
   };
 
   return (
-    <div className="container mb-20 mt-4 flex w-full flex-col justify-start space-y-4">
+    <div className="container flex flex-col px-20">
       <div className="flex flex-col space-y-2 pb-4">
         <div className="flex items-center space-x-4 ">
           <img src={plugin.manifest.logo_url} width={24} height={24} />
@@ -68,8 +68,8 @@ const PluginPage: NextPageWithLayout<PluginPageProps> = ({ plugin, name }) => {
       </div>
       {activeTab === "plugin" && (
         <div>
-          <div className="py-2">/well-found/ai-plugin.json</div>
-          <ReactMarkdown className="border-2 p-4">
+          <div className="py-2">/.well-known/ai-plugin.json</div>
+          <ReactMarkdown className="overflow-auto border-2 p-4">
             {"```\n" + JSON.stringify(plugin.manifest, null, 2) + "\n```"}
           </ReactMarkdown>
         </div>

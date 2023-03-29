@@ -69,8 +69,10 @@ const PluginSearch = () => {
     router.push(`/plugin/${pluginName}`);
   };
 
+  const inputRef = useRef<any>(null);
+
   return (
-    <div className="container relative w-full pt-8" ref={wrapperRef}>
+    <div className="container relative pt-8" ref={wrapperRef}>
       <div className="relative">
         {isLoading && (
           <span className="daisy-loading">
@@ -78,7 +80,8 @@ const PluginSearch = () => {
           </span>
         )}
         <input
-          className="w-full rounded border border-gray-300 p-2"
+          ref={inputRef}
+          className="daisy-input-ghost w-full rounded border border-gray-300 p-2 "
           style={{ textTransform: "none" }}
           placeholder="Search Plugins"
           value={searchTerm}
@@ -90,7 +93,12 @@ const PluginSearch = () => {
       </div>
 
       {!!searchTerm.length && showDropdown && (
-        <div className="dropdown fixed z-10 w-full rounded-b border border-gray-300 bg-white">
+        <div
+          className="dropdown absolute z-10 mt-[1.5px] w-full rounded-b border border-gray-300 bg-white"
+          style={{
+            width: inputRef.current?.offsetWidth,
+          }}
+        >
           {isLoading ? (
             <div className="p-2 text-center">
               <i className="loading"></i> Loading...
