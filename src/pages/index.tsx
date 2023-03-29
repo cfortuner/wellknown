@@ -7,6 +7,15 @@ import { api } from "~/utils/api";
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
 
+  // todo:
+  // - query db for plugins
+
+  // - display plugins
+
+  // - add plugin form
+
+  // - add plugin to db
+
   return (
     <>
       <Head>
@@ -14,39 +23,41 @@ const Home: NextPage = () => {
         <meta name="description" content="Add plugins to your registry!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-            Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-          </h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-              href="https://create.t3.gg/en/usage/first-steps"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">First Steps →</h3>
-              <div className="text-lg">
-                Just the basics - Everything you need to know to set up your
-                database and authentication.
-              </div>
-            </Link>
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-              href="https://create.t3.gg/en/introduction"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">Documentation →</h3>
-              <div className="text-lg">
-                Learn more about Create T3 App, the libraries it uses, and how
-                to deploy it.
-              </div>
-            </Link>
+      <main className="flex min-h-screen flex-col items-center bg-white">
+        {/** HEADER */}
+        <div className="daisy-navbar bg-base-100">
+          <div className="flex-1">
+            <a className="daisy-btn-ghost daisy-btn text-xl normal-case">
+              AI Plugins
+            </a>
           </div>
-          <p className="text-2xl text-white">
-            {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-          </p>
+          <div className="flex-none">
+            <ul className="daisy-menu daisy-menu-horizontal px-1">
+              <li>
+                <a>About</a>
+              </li>
+              {/** discord icon and link */}
+              <li>
+                <a>Discord</a>
+              </li>
+            </ul>
+          </div>
         </div>
+        <div className="container w-full">
+          <div className="daisy-form-control">
+            <label className="daisy-label">
+              <span className="daisy-label-text text-lg font-semibold">
+                Search
+              </span>
+            </label>
+            <input
+              type="text"
+              placeholder="Type here"
+              className="daisy-input-bordered daisy-input w-full max-w-lg rounded-sm"
+            />
+          </div>
+        </div>
+        <div>Add a plugin</div>
       </main>
     </>
   );
