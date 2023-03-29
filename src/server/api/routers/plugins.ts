@@ -1,15 +1,9 @@
-import { z } from "zod";
+import { v4 as uuid } from "uuid";
+import * as z from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
-import plugins from "../../../initial-plugins.json";
-
-export interface Plugin {
-  id: string;
-  name: string;
-  installed: boolean;
-  manifest: PluginManifest;
-}
+import pluginsJson from "../../../initial-plugins.json";
 
 type ManifestAuthType = "none" | "user_http" | "service_http" | "oauth";
 const ManifestAuthType: {
@@ -23,7 +17,7 @@ const ManifestAuthType: {
 
 interface BaseManifestAuth {
   type: ManifestAuthType;
-  instructions: string;
+  instructions?: string;
 }
 
 interface ManifestNoAuth extends BaseManifestAuth {
@@ -53,8 +47,8 @@ interface ManifestOAuthAuth extends BaseManifestAuth {
 type ManifestAuth =
   | ManifestNoAuth
   | ManifestServiceHttpAuth
-  // | ManifestUserHttpAuth
   | ManifestOAuthAuth;
+// todo: add the http auth
 
 interface OpenApiSpecification {}
 
@@ -71,10 +65,71 @@ interface PluginManifest {
   legal_info_url: string;
 }
 
-export const pluginsRouter = createTRPCRouter({
-  getPlugins: publicProcedure.query(() => {
-    return {
-      plugins: plugins,
-    };
+// authSchema can be many types
+const authSchema = z.union([
+  z.object({
+    type: z.literal("none"),
+    instructions: z.optional(z.string()),
   }),
+  z.object({
+    type: z.literal("service_http"),
+    instructions: z.optional(z.string()),
+  }),
+  z.object({
+    type: z.literal("oauth"),
+    instructions: z.optional(z.string()),
+    client_url: z.string(),
+    scope: z.string(),
+    authorization_url: z.string(),
+    authorization_content_type: z.string(),
+    verification_tokens: z.object({
+      openai: z.string(),
+    }),
+  }),
+]);
+
+const manifestSchema = z.object({
+  schema_version: z.string(),
+  name_for_model: z.string(),
+  name_for_human: z.string(),
+  description_for_model: z.string(),
+  description_for_human: z.string(),
+  auth: authSchema,
+  api: z.object({}),
+  logo_url: z.string(),
+  contact_email: z.string(),
+  legal_info_url: z.string(),
+});
+
+const pluginSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  installed: z.boolean(),
+  manifest: manifestSchema,
+});
+
+export type Plugin = z.infer<typeof pluginSchema>;
+
+export const pluginsRouter = createTRPCRouter({
+  getPlugins: publicProcedure
+    .output(
+      z.object({
+        plugins: z.array(pluginSchema),
+      })
+    )
+    .query(() => {
+      // todo: once this is in the db we can remove this
+      const plugins = Object.entries(pluginsJson).map(([id, manifest]) => {
+        return {
+          id: uuid(),
+          name: manifest.name_for_model,
+          installed: false,
+          manifest,
+        };
+      }) as Plugin[];
+
+      return {
+        plugins: plugins,
+      };
+    }),
 });
