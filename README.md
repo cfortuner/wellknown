@@ -16,4 +16,15 @@ LLM's will eventually need to be able to find the right tools to complete a task
 
 This app will provide a search api and a admin ui for managing plugins.
 
+# Submitting a plugin
+
+1. open a pr with your ai-plugin.json file in the `plugins` folder
+2. for now, i'll review it and add it to the list
+
 # TODO
+
+1. build a simple website for viewing plugins and plugin apis
+2. create a public api for searching for plugins and fetching their ai-plugin.json files
+3. ???
+
+
