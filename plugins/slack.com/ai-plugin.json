@@ -1,0 +1,25 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "Slack",
+    "name_for_model": "Slack",
+    "description_for_human": "Plugin for querying Slack.",
+    "description_for_model": "Plugin for querying Slack.",
+    "auth": {
+      "type": "oauth",
+      "client_url": "https://slack.com/oauth/v2/authorize",
+      "authorization_url": "https://slack.com/api/oauth.v2.access",
+      "scope": "search:read",
+      "authorization_content_type": "application/x-www-form-urlencoded",
+      "verification_tokens": {
+        "openai": "16bb153180ae4716834f25dc2ed0b52b"
+      }
+    },
+    "api": {
+      "type": "openapi",
+      "url": "https://api.slack.com/specs/openapi/ai-plugin.yaml",
+      "has_user_authentication": true
+    },
+    "logo_url": "https://slack.com/img/slack_logo_mark.svg",
+    "contact_email": "TODO",
+    "legal_info_url": "TODO"
+}

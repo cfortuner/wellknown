@@ -1,0 +1,18 @@
+{
+    "schema_version":"v1",
+    "name_for_model":"datasette_datasette_io_3c330f",
+    "name_for_human":"Query datasette.io",
+    "description_for_model":"Run SQLite queries against a database hosted by Datasette.\nDatasette supports most SQLite syntax but does not support PRAGMA statements.\nUse `select group_concat(sql, ';') from sqlite_master` to see the list of tables and their columns\nUse `select sql from sqlite_master where name = 'table_name'` to see the schema for a table, including its columns.\nInstead of `PRAGMA table_info(table_name)` use `select * from pragma_table_info('table_name')`\nPRAGMA statements are not allowed. `select * from pragma_table_info('table_name') is allowed.",
+    "description_for_human":"Run SQL against data in Datasette.",
+    "auth":{
+       "type":"none"
+    },
+    "api":{
+       "type":"openapi",
+       "url":"https://datasette.io/-/chatgpt-openapi-schema.yml",
+       "has_user_authentication":false
+    },
+    "logo_url":"https://avatars.githubusercontent.com/u/126964132?s=400&u=08b2ed680144a4feb421308f09e5f3cc5876211a&v=4",
+    "contact_email":"hello@contact.com",
+    "legal_info_url":"hello@legal.com"
+ }

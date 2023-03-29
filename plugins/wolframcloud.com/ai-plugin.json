@@ -1,0 +1,22 @@
+{
+    "schema_version": "v1",
+    "name_for_model": "WolframAlpha",
+    "name_for_human": "Wolfram Alpha",
+    "description_for_model": "Dynamic computation and curated data from Wolfram Alpha. When solving math word problems do not send the whole word problem at once to Wolfram Alpha. Instead break up the word problems into steps, translate the problems in mathematical equations with well-named variables and then send the equations to be solved to Wolfram Alpha. Do this for all needed steps for solving the whole problem and then write up a complete coherent description how the problem was solved, including all equations. For math questions like \"what is the integral of x cos^3 x\" use getShortAnswer. For data questions like \"what is the population of springfield\" or \"distance from springfield to detroit\" use getSpokenResult. If getShortAnswer or getSpokenResult fail, extract the answer from the title and plaintext in getFullResults.",
+    "description_for_human": "Dynamic computation and curated data from Wolfram Alpha.",
+    "auth": {
+      "type": "service_http",
+      "authorization_type": "bearer",
+      "verification_tokens": {
+        "openai": "3c769588676d4e5e876ebf70aa110d03"
+      }
+    },
+    "api": {
+      "url": "https://www.wolframcloud.com/obj/wolfram-alpha-chatgpt/apispec3.yaml",
+      "has_user_authentication": false,
+      "type": "openapi"
+    },
+    "logo_url": "https://www.wolframcdn.com/images/icons/Wolfram.png",
+    "contact_email": "partner-program@wolfram.com",
+    "legal_info_url": "https://products.wolframalpha.com/api/commercial-termsofuse"
+  }

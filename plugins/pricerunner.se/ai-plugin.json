@@ -1,0 +1,18 @@
+{
+    "schema_version": "v1",
+    "name_for_model": "PricerunnerProducts",
+    "name_for_human": "Pricerunner product recommendations",
+    "description_for_human": "This plugin lets users find relevant products when asking for any kind of shopping suggestions",
+    "description_for_model": "Get relevant product suggestions for any shopping or researching purpose. The query to be sent should not include stopwords like articles, prepositions and determinants. The api works best when searching for words that are related to products, like their name, brand, model or category.",
+    "api": {
+      "type": "openapi",
+      "url": "https://www.pricerunner.com/public/openai/v0/api-docs/",
+      "has_user_authentication": false
+    },
+    "auth": {
+      "type": "none"
+    },
+    "logo_url": "https://www.pricerunner.com/images/i/192x192/icon-dark-2020-1024x1024.png",
+    "contact_email": "openai-products@klarna.com",
+    "legal_info_url": "https://www.pricerunner.com/info/terms"
+  }
