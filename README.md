@@ -27,4 +27,7 @@ This app will provide a search api and a admin ui for managing plugins.
 2. create a public api for searching for plugins and fetching their ai-plugin.json files
 3. ???
 
+# Plugin Templates
 
+ChatGPT Retrieval Plugin Template:
+https://github.com/openai/chatgpt-retrieval-plugin
