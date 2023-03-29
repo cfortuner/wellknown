@@ -1,28 +1,19 @@
-# Create T3 App
+# Plugins API
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+What is this?
 
-## What's next? How do I make an app with this?
+This is a directory of AI Plugins as defined by https://openai.com/blog/chatgpt-plugins#browsing
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+With the release of chatGPT plugins, developers can now publish `ai-plugin.json` manifest files alongside their APIs which chatGPT and other LLMs can use to interact with the api in natural language.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+This enables ai modesl to use 'tools' to fetch and store data, take actions and listen for events.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+# Goals
 
-## Learn More
+The main goal for this project is to be like npm for ai agents.
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+LLM's will eventually need to be able to find the right tools to complete a task, even if they haven't been installed by the user.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+This app will provide a search api and a admin ui for managing plugins.
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+# TODO
