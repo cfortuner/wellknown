@@ -1,4 +1,5 @@
 // src/pages/submit.tsx
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { manifestSchema } from "~/server/plugins";
 
@@ -70,8 +71,19 @@ const SubmitPluginPage: React.FC = () => {
     }
   };
 
+  const router = useRouter();
+  const handleBackButtonClick = () => {
+    router.back();
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
+      <button
+        onClick={handleBackButtonClick}
+        className="mb-4 text-blue-600 underline"
+      >
+        &larr; Back
+      </button>
       <h1 className="mb-6 text-3xl font-semibold">Submit Plugin</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
