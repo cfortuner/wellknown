@@ -87,7 +87,7 @@ const authSchema = z.union([
   }),
 ]);
 
-const manifestSchema = z.object({
+export const manifestSchema = z.object({
   schema_version: z.string(),
   name_for_model: z.string(),
   name_for_human: z.string(),
