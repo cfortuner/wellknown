@@ -30,8 +30,27 @@ interface ManifestServiceHttpAuth extends BaseManifestAuth {
     openai: string; //"cdfcc1dadb3540b8aa7c5c5f1512849b";
   };
 }
+// typeguard for ManifestNoAuth
+export const isManifestNoAuth = (
+  auth: ManifestAuth
+): auth is ManifestNoAuth => {
+  return auth.type === "none";
+};
+// typeguard for ManifestServiceHttpAuth
+export const isManifestServiceHttpAuth = (
+  auth: ManifestAuth
+): auth is ManifestServiceHttpAuth => {
+  return auth.type === "service_http";
+};
 
-interface ManifestOAuthAuth extends BaseManifestAuth {
+// typeguard for ManifestOAuthAuth
+
+export const isManifestOAuthAuth = (
+  auth: ManifestAuth
+): auth is ManifestOAuthAuth => {
+  return auth.type === "oauth";
+};
+export interface ManifestOAuthAuth extends BaseManifestAuth {
   type: "oauth";
   instructions: string;
   client_url: string; // "https://nla.zapier.com/oauth/authorize/",
@@ -51,7 +70,7 @@ type ManifestAuth =
 
 interface OpenApiSpecification {}
 
-interface PluginManifest {
+export interface PluginManifest {
   schema_version: string;
   name_for_model: string;
   name_for_human: string;
@@ -110,16 +129,27 @@ const pluginSchema = z.object({
 export type Plugin = z.infer<typeof pluginSchema>;
 
 // a nextjs handler
+const allPlugins = Object.entries(pluginsJson).map(([id, manifest]) => {
+  return {
+    id: uuid(),
+    name: manifest.name_for_model,
+    installed: false,
+    manifest,
+  };
+});
 
-export const getPlugins = async (): Promise<Plugin[]> => {
-  const plugins = Object.entries(pluginsJson).map(([id, manifest]) => {
-    return {
-      id: uuid(),
-      name: manifest.name_for_model,
-      installed: false,
-      manifest,
-    };
-  }) as Plugin[];
+export const getPluginById = async (id: string): Promise<Plugin> => {
+  const plugin = allPlugins.find((plugin) => plugin.id === id);
 
-  return plugins;
+  return plugin as Plugin;
+};
+
+export const getPlugins = async (searchTerm: string): Promise<Plugin[]> => {
+  const plugins = allPlugins.filter((plugin) =>
+    plugin.manifest.name_for_human
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+  );
+
+  return plugins as Plugin[];
 };

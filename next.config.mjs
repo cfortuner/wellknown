@@ -18,5 +18,10 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  transpilePackages: [
+    "react-syntax-highlighter",
+    "swagger-client",
+    "swagger-ui-react",
+  ],
 };
 export default config;

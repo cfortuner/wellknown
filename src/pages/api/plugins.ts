@@ -3,12 +3,13 @@ import { getPlugins } from "~/server/plugins";
 
 export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
+  const searchTerm = req.query.search as string;
 
   if (method === "GET") {
-    const plugins = await getPlugins();
+    const plugins = await getPlugins(searchTerm);
 
     return res.status(200).json({
-      plugins: plugins,
+      plugins,
     });
   }
 
