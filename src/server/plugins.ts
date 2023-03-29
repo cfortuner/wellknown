@@ -1,9 +1,8 @@
+import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { v4 as uuid } from "uuid";
 import * as z from "zod";
 
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-
-import pluginsJson from "../../../initial-plugins.json";
+import pluginsJson from "../initial-plugins.json";
 
 type ManifestAuthType = "none" | "user_http" | "service_http" | "oauth";
 const ManifestAuthType: {
@@ -110,26 +109,17 @@ const pluginSchema = z.object({
 
 export type Plugin = z.infer<typeof pluginSchema>;
 
-export const pluginsRouter = createTRPCRouter({
-  getPlugins: publicProcedure
-    .output(
-      z.object({
-        plugins: z.array(pluginSchema),
-      })
-    )
-    .query(() => {
-      // todo: once this is in the db we can remove this
-      const plugins = Object.entries(pluginsJson).map(([id, manifest]) => {
-        return {
-          id: uuid(),
-          name: manifest.name_for_model,
-          installed: false,
-          manifest,
-        };
-      }) as Plugin[];
+// a nextjs handler
 
-      return {
-        plugins: plugins,
-      };
-    }),
-});
+export const getPlugins = async (): Promise<Plugin[]> => {
+  const plugins = Object.entries(pluginsJson).map(([id, manifest]) => {
+    return {
+      id: uuid(),
+      name: manifest.name_for_model,
+      installed: false,
+      manifest,
+    };
+  }) as Plugin[];
+
+  return plugins;
+};
