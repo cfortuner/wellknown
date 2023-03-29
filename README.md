@@ -1,4 +1,4 @@
-# Plugins API
+# Wellknown.ai
 
 What is this?
 
