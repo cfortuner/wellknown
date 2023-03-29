@@ -8,33 +8,17 @@ import { Plugin } from "~/server/plugins";
 
 // import iniial plugins json
 
-import { api } from "~/utils/api";
+import useSWR from "swr";
+
+const fetcher = (...args: any) => fetch(args).then((res) => res.json());
 
 const Home: NextPage = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<{ plugins: Plugin[] } | null>(null);
-
-  useEffect(() => {
-    const fetchPlugins = async () => {
-      const res = await fetch("/api/plugins");
-      const plugins = await res.json();
-      setData(plugins);
-      setIsLoading(false);
-    };
-
-    fetchPlugins();
-  }, []);
+  const { data, error, isLoading } = useSWR("/api/plugins", fetcher);
 
   // todo:
   // - query db for plugins
-
-  // - display plugins
-
   // - add plugin form
-
   // - add plugin to db
-
-  console.log(data?.plugins);
 
   return (
     <>
