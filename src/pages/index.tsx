@@ -56,7 +56,7 @@ const Header = () => {
       <div className="flex-none">
         <ul className="daisy-menu daisy-menu-horizontal px-1">
           <li>
-            <a>About</a>
+            <a href="/about" className="daisy-link">About</a>
           </li>
         </ul>
       </div>
