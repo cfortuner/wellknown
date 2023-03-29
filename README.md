@@ -1,4 +1,4 @@
-# Wellknown.ai
+# Wellknown
 
 What is this?
 
