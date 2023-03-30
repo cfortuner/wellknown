@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useState } from "react";
 import SearchLayout from "~/components/SearchLayout";
 import {
-  getPluginById,
   getPlugins,
   ManifestOAuthAuth,
   Plugin,

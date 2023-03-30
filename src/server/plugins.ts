@@ -179,12 +179,6 @@ const allPlugins = pluginsJson.map((plugin) => {
   };
 });
 
-export const getPluginById = async (id: string): Promise<Plugin> => {
-  const plugin = allPlugins.find((plugin) => plugin.id === id);
-
-  return plugin as Plugin;
-};
-
 export const getPlugins = async (searchTerm?: string): Promise<Plugin[]> => {
   if (!searchTerm) {
     console.log(
