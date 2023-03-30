@@ -68,11 +68,13 @@ const PluginPage: NextPageWithLayout<PluginPageProps> = ({ plugin }) => {
           <div className="py-2">OpenAPISpec</div>
           <div className="border-2">
             <SwaggerUI
-              requestInterceptor={(req) => {
+              requestInterceptor={async (req) => {
+                if (req.url.startsWith("/api/proxy?url=")) {
+                  return req;
+                }
+
                 // need to send the request to my proxy url
-                req.url = `/api/proxy?url=${encodeURIComponent(
-                  plugin.manifest.api.url
-                )}`;
+                req.url = `/api/proxy?url=${encodeURIComponent(req.url)}`;
                 return req;
               }}
               url={`/api/proxy?url=${encodeURIComponent(

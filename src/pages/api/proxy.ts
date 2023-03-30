@@ -28,24 +28,47 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const url = decodeURIComponent(targetUrl);
-  console.log("Proxying request to: " + url);
+  // const url = decodeURIComponent(targetUrl);
+  console.log("Proxying request to: " + targetUrl);
 
   try {
     const axiosConfig = {
-      url: url,
+      url: targetUrl,
       method: req.method, // Set method dynamically based on the incoming request
       headers: {
-        ...req.headers, // Pass through incoming request headers
         // Optionally, add custom headers here
       },
       data: req.body, // Pass through the request body for POST, PUT, etc.
     };
 
     // Remove the 'host' header to avoid conflicts with the target server
-    delete axiosConfig.headers["host"];
+    // delete axiosConfig.headers["host"];
 
-    let response = await axios.request(axiosConfig);
+    console.log("Axios config: " + JSON.stringify(axiosConfig));
+
+    let response;
+    try {
+      response = await axios.request(axiosConfig);
+    } catch (error: any) {
+      console.log("Error: " + error);
+
+      if (error.response) {
+        console.log("Error response: " + error.response);
+        console.log("Error response data: " + error.response.data);
+        console.log("Error response status: " + error.response.status);
+        console.log("Error response headers: " + error.response.headers);
+      }
+
+      // return the error response
+      res.status(error.response.status).json(error.response.data);
+    }
+
+    if (!response) {
+      res.status(500).json({ error: "Error fetching data from target server" });
+      return;
+    }
+
+    console.log(response.data);
 
     // if yaml, convert to json
     if (isYamlString(response.data)) {
