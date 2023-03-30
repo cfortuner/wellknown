@@ -1,0 +1,18 @@
+{
+    "schema_version": "v1.0.1",
+    "name_for_human": "BuildtAI",
+    "name_for_model": "buildt",
+    "description_for_human": "Plugin for non-technical team members to ask questions about how parts of the codebase work.",
+    "description_for_model": "If a user asks any questions regarding a codebase, then use the BuildtAI plugin to answer the question, this plugin will return you lots of code snippets related to your query, and then you must use this to answer the user's question. You must answer the questions in an accessible way to non-technical people, to the level of a junior Product Manager, or Marketing Executive. Don't cite massive code snippets but you may reference smaller simpler ones, and make analogies to explain more complex concepts to people.",
+    "auth": {
+      "type": "none"
+    },
+    "api": {
+      "type": "openapi",
+      "url": "http://localhost:3333/openapi.yaml",
+      "is_user_authenticated": false
+    },
+    "logo_url": "https://firebasestorage.googleapis.com/v0/b/buildt-internal.appspot.com/o/branding%2Fbuildt-logo.png?alt=media&token=bb564dbd-755f-4bd5-a086-4c444761fc2c",
+    "contact_email": "ali@buildt.ai",
+    "legal_info_url": "sam@buildt.ai"
+  }
