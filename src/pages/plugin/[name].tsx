@@ -3,11 +3,12 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React, { ReactElement, useState } from "react";
 import SearchLayout from "~/components/SearchLayout";
-import { getPlugins, ManifestOAuthAuth, Plugin, PluginManifest } from "~/types";
+import { ManifestOAuthAuth, Plugin, PluginManifest } from "~/types";
 import { NextPageWithLayout } from "../_app";
 import ReactMarkdown from "react-markdown";
 import SwaggerUI from "swagger-ui-react";
 import "swagger-ui-react/swagger-ui.css";
+import { getPlugins } from "~/server/server";
 
 // Assuming you have the PluginManifest type available
 interface PluginPageProps {
