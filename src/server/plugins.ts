@@ -2,7 +2,37 @@ import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { v4 as uuid } from "uuid";
 import * as z from "zod";
 
-import pluginsJson from "../initial-plugins.json";
+import fs from "fs";
+import path from "path";
+
+function loadPluginsJson(directory: string) {
+  const pluginFiles = [];
+
+  const folders = fs
+    .readdirSync(directory, { withFileTypes: true })
+    .filter((item) => item.isDirectory())
+    .map((item) => item.name);
+
+  for (const folder of folders) {
+    const filePath = path.join(directory, folder, "ai-plugin.json");
+    if (fs.existsSync(filePath)) {
+      const jsonContent = fs.readFileSync(filePath, "utf-8");
+      const manifest = JSON.parse(jsonContent);
+      pluginFiles.push({
+        name: folder,
+        manifest,
+      });
+    }
+  }
+
+  return pluginFiles;
+}
+
+const pluginsDirectory = path.join(process.cwd(), "plugins");
+const pluginsJson = loadPluginsJson(pluginsDirectory);
+console.log("pluginsJson", pluginsJson);
+
+// import pluginsJson from "../initial-plugins.json";
 
 type ManifestAuthType = "none" | "user_http" | "service_http" | "oauth";
 const ManifestAuthType: {
@@ -17,6 +47,7 @@ const ManifestAuthType: {
 interface BaseManifestAuth {
   type: ManifestAuthType;
   instructions?: string;
+  has_user_authentication: boolean;
 }
 
 interface ManifestNoAuth extends BaseManifestAuth {
@@ -83,6 +114,15 @@ export interface PluginManifest {
   legal_info_url: string;
 }
 
+// api schema
+const apiSchema = z.object({
+  openapi: z.string(),
+  info: z.object({
+    title: z.string(),
+  }),
+  url: z.string(),
+});
+
 // authSchema can be many types
 const authSchema = z.union([
   z.object({
@@ -113,7 +153,7 @@ export const manifestSchema = z.object({
   description_for_model: z.string(),
   description_for_human: z.string(),
   auth: authSchema,
-  api: z.object({}),
+  api: apiSchema,
   logo_url: z.string(),
   contact_email: z.string(),
   legal_info_url: z.string(),
@@ -129,10 +169,10 @@ const pluginSchema = z.object({
 export type Plugin = z.infer<typeof pluginSchema>;
 
 // a nextjs handler
-const allPlugins = Object.entries(pluginsJson).map(([id, manifest]) => {
+const allPlugins = pluginsJson.map((plugin) => {
+  const { name, manifest } = plugin;
   return {
-    id: uuid(),
-    name: manifest.name_for_model,
+    name: name,
     installed: false,
     manifest,
   };
@@ -144,11 +184,21 @@ export const getPluginById = async (id: string): Promise<Plugin> => {
   return plugin as Plugin;
 };
 
-export const getPlugins = async (searchTerm: string): Promise<Plugin[]> => {
-  const plugins = allPlugins.filter((plugin) =>
-    plugin.manifest.name_for_human
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase())
+export const getPlugins = async (searchTerm?: string): Promise<Plugin[]> => {
+  if (!searchTerm) {
+    console.log(
+      "allPlugins",
+      allPlugins.map((p) => p.manifest.api)
+    );
+    return allPlugins as Plugin[];
+  }
+
+  const plugins = allPlugins.filter(
+    (plugin) =>
+      plugin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      plugin.manifest.name_for_human
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase())
   );
 
   return plugins as Plugin[];

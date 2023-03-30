@@ -7,9 +7,12 @@ const Header = () => {
       <div className="daisy-navbar border-b-2">
         {/** a colorful bar across the top */}
         <div className="flex-1">
-          <a className="daisy-btn-ghost daisy-btn text-xl font-semibold normal-case text-primary">
+          <Link
+            href="/"
+            className="daisy-btn-ghost daisy-btn text-xl font-semibold normal-case text-primary"
+          >
             Wellknown
-          </a>
+          </Link>
           <p className="text-sm">AI Plugins Registry</p>
         </div>
         <div className="flex-none">

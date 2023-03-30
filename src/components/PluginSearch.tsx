@@ -4,7 +4,6 @@ import SearchResult from "./SearchResult";
 
 const PluginSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [plugins, setPlugins] = useState([]);
   const [filteredPlugins, setFilteredPlugins] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +15,8 @@ const PluginSearch = () => {
       try {
         const response = await fetch(`/api/plugins?search=${searchTerm}`);
         const data = await response.json();
-        setPlugins(data.plugins);
+        console.log(data);
+        setFilteredPlugins(data.plugins);
       } catch (err) {
         console.error(err);
       } finally {
@@ -45,21 +45,10 @@ const PluginSearch = () => {
 
   const handleSearchChange = (e: any) => {
     setSearchTerm(e.target.value);
-    if (e.target.value.length === 0) {
-      setFilteredPlugins([]);
-      return;
-    }
-
-    const filtered = plugins.filter((plugin) =>
-      //@ts-ignore
-      plugin.manifest.name_for_human
-        .toLowerCase()
-        .includes(e.target.value.toLowerCase())
-    );
-    setFilteredPlugins(filtered);
   };
 
   const router = useRouter();
+
   const handlePluginClick = (pluginName: string) => {
     setSearchTerm(pluginName);
     setShowDropdown(false);
