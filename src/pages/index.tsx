@@ -13,16 +13,7 @@ import PluginCard from "~/components/PluginCard";
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 const Home: NextPageWithLayout = () => {
-  // todo:
-  // - query db for plugins
-  // - add plugin form
-  // - add plugin to db
-
   const { data, isLoading } = useSWR("/api/plugins", fetcher);
-
-  /* tailwind css for a responsive tailwind grid*/
-  const grid = `container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4`;
-  const gridItem = `bg-white rounded-lg p-4 border hover:border-primary`;
 
   return (
     <>
@@ -37,9 +28,14 @@ const Home: NextPageWithLayout = () => {
       {isLoading || !data.plugins ? (
         <div>Loading...</div>
       ) : (
-        <div className={grid}>
+        <div
+          className={`container grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5`}
+        >
           {data.plugins?.map((plugin: any) => (
-            <div key={plugin.name} className={gridItem}>
+            <div
+              key={plugin.name}
+              className={`rounded-lg border bg-white p-4 hover:border-primary`}
+            >
               <Link href={`/plugin/${plugin.name}`}>
                 <PluginCard plugin={plugin} />
               </Link>
