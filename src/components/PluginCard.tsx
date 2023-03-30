@@ -1,4 +1,4 @@
-import { Plugin } from "~/server/plugins";
+import { Plugin } from "~/types";
 
 const PluginCard = ({ plugin }: { plugin: Plugin }) => {
   return (

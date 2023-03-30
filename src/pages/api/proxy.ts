@@ -32,11 +32,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   console.log("Proxying request to: " + url);
 
   try {
-    let response = await axios.get(url, {
+    const axiosConfig = {
+      url: url,
+      method: req.method, // Set method dynamically based on the incoming request
       headers: {
+        ...req.headers, // Pass through incoming request headers
         // Optionally, add custom headers here
       },
-    });
+      data: req.body, // Pass through the request body for POST, PUT, etc.
+    };
+
+    // Remove the 'host' header to avoid conflicts with the target server
+    delete axiosConfig.headers["host"];
+
+    let response = await axios.request(axiosConfig);
 
     // if yaml, convert to json
     if (isYamlString(response.data)) {

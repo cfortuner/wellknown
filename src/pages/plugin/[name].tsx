@@ -3,12 +3,7 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React, { ReactElement, useState } from "react";
 import SearchLayout from "~/components/SearchLayout";
-import {
-  getPlugins,
-  ManifestOAuthAuth,
-  Plugin,
-  PluginManifest,
-} from "~/server/plugins";
+import { getPlugins, ManifestOAuthAuth, Plugin, PluginManifest } from "~/types";
 import { NextPageWithLayout } from "../_app";
 import ReactMarkdown from "react-markdown";
 import SwaggerUI from "swagger-ui-react";
@@ -72,9 +67,14 @@ const PluginPage: NextPageWithLayout<PluginPageProps> = ({ plugin }) => {
           <div className="py-2">OpenAPISpec</div>
           <div className="border-2">
             <SwaggerUI
-              //@ts-ignore
+              requestInterceptor={(req) => {
+                // need to send the request to my proxy url
+                req.url = `/api/proxy?url=${encodeURIComponent(
+                  plugin.manifest.api.url
+                )}`;
+                return req;
+              }}
               url={`/api/proxy?url=${encodeURIComponent(
-                //@ts-ignore
                 plugin.manifest.api.url
               )}`}
               docExpansion="full"

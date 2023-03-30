@@ -1,7 +1,7 @@
 // src/pages/submit.tsx
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { manifestSchema } from "~/server/plugins";
+import { manifestSchema } from "~/types";
 
 const submitPlugin = async (name: string, manifestFile: File) => {
   const formData = new FormData();

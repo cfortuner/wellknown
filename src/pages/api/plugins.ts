@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getPlugins } from "~/server/plugins";
+import { getPlugins } from "~/types";
 
 export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
