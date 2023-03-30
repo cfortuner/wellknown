@@ -35,6 +35,7 @@ console.log("pluginsJson", pluginsJson);
 // import pluginsJson from "../initial-plugins.json";
 
 type ManifestAuthType = "none" | "user_http" | "service_http" | "oauth";
+
 const ManifestAuthType: {
   [key in ManifestAuthType]: ManifestAuthType;
 } = {
