@@ -19,18 +19,18 @@ const Header = () => {
           <ul className="daisy-menu daisy-menu-horizontal px-1 ">
             <li>
               <Link
-                href="/about"
-                className="daisy-btn-link daisy-link no-underline"
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
                 href="https://github.com/cfortuner/wellknown/tree/main/SUBMIT_PLUGIN.md"
                 className="daisy-btn-link daisy-link whitespace-nowrap no-underline"
               >
                 + Submit Plugin
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/about"
+                className="daisy-btn-link daisy-link no-underline"
+              >
+                About
               </Link>
             </li>
           </ul>
