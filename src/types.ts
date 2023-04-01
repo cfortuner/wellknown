@@ -131,6 +131,7 @@ const pluginSchema = z.object({
   name: z.string(),
   installed: z.boolean(),
   manifest: manifestSchema,
+  openAPI: z.any(),
 });
 
 export type Plugin = z.infer<typeof pluginSchema>;

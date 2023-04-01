@@ -46,7 +46,7 @@ const PluginPage: NextPageWithLayout<PluginPageProps> = ({ plugin }) => {
         {tabs.map((tab) => (
           <a
             key={tab}
-            className={`daisy-tab daisy-tab-bordered daisy-tab-lg ${
+            className={`daisy-tab-bordered daisy-tab daisy-tab-lg ${
               tab === activeTab ? "daisy-tab-active" : ""
             }`}
             onClick={() => handleTabClick(tab)}
@@ -67,7 +67,7 @@ const PluginPage: NextPageWithLayout<PluginPageProps> = ({ plugin }) => {
         <div>
           <div className="py-2">OpenAPISpec</div>
           <div className="border-2">
-            <SwaggerUI
+            {/* <SwaggerUI
               requestInterceptor={async (req) => {
                 if (req.url.startsWith("/api/proxy?url=")) {
                   return req;
@@ -82,7 +82,12 @@ const PluginPage: NextPageWithLayout<PluginPageProps> = ({ plugin }) => {
               )}`}
               docExpansion="full"
               defaultModelsExpandDepth={0}
-            />
+            /> */}
+            <ReactMarkdown className="overflow-auto border-2 p-4">
+              {"```\n" +
+                JSON.stringify(plugin.openAPI || {}, null, 2) +
+                "\n```"}
+            </ReactMarkdown>
           </div>
         </div>
       )}

@@ -27,31 +27,43 @@ function loadPluginsJson(directory: string) {
 
 const pluginsDirectory = path.join(process.cwd(), "plugins");
 const pluginsJson = loadPluginsJson(pluginsDirectory);
-console.log("pluginsJson", pluginsJson);
 
 // import pluginsJson from "../initial-plugins.json";
 
 // a nextjs handler
-const allPlugins = pluginsJson.map((plugin) => {
-  const { name, manifest } = plugin;
-  return {
-    name: name,
-    installed: false,
-    manifest,
-  };
-});
+let allPlugins: any;
 
 export const getPlugins = async (searchTerm?: string): Promise<Plugin[]> => {
-  if (!searchTerm) {
-    console.log(
-      "allPlugins",
-      allPlugins.map((p) => p.manifest.api)
+  if (!allPlugins) {
+    allPlugins = await Promise.all(
+      pluginsJson.map(async (plugin) => {
+        const { name, manifest } = plugin;
+        let openAPI;
+        try {
+          const res = await fetch(manifest.api.url);
+          openAPI = await res.json();
+        } catch (e) {
+          console.log("error", e);
+        }
+
+        console.log("openAPI", openAPI);
+
+        return {
+          name: name,
+          installed: false,
+          manifest,
+          openAPI: openAPI || {},
+        };
+      })
     );
+  }
+
+  if (!searchTerm) {
     return allPlugins as Plugin[];
   }
 
   const plugins = allPlugins.filter(
-    (plugin) =>
+    (plugin: any) =>
       plugin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       plugin.manifest.name_for_human
         .toLowerCase()
