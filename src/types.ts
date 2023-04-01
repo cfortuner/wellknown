@@ -127,9 +127,7 @@ export const manifestSchema = z.object({
 });
 
 const pluginSchema = z.object({
-  id: z.string(),
   name: z.string(),
-  installed: z.boolean(),
   manifest: manifestSchema,
   openAPI: z.any(),
 });

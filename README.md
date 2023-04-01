@@ -21,11 +21,29 @@ This app will provide a search api and a admin ui for managing plugins.
 1. open a pr with your ai-plugin.json file in the `plugins` folder
 2. for now, i'll review it and add it to the list
 
-# TODO
+# API
 
-1. build a simple website for viewing plugins and plugin apis
-2. create a public api for searching for plugins and fetching their ai-plugin.json files
-3. ???
+To fetch plugins from wellknown.ai, use the following api endpoint:
+
+`GET https://wellknown.ai/api/plugins`
+
+Response schema
+
+```
+{
+    name: string
+    manifest: object // the ai-plugin.json file as json
+    openAPI: object // the openapi json description json
+}
+
+```
+
+# Closed Plugins
+
+- https://instacart.com/.well-known/ai-plugin.json
+- https://www.kayak.com/.well-known/ai-plugin.json
+- https://opentable.com/.well-known/ai-plugin.json
+- https://apim.expedia.com/.well-known/ai-plugin.json
 
 # Plugin Templates
 

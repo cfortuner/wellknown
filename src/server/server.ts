@@ -55,7 +55,6 @@ export const getPlugins = async (searchTerm?: string): Promise<Plugin[]> => {
 
         return {
           name: name,
-          installed: false,
           manifest,
           openAPI: openAPI || {},
         };
