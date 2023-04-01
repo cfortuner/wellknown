@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "APIs.guru Plugin",
+  "name_for_model": "apis.guru",
+  "description_for_human": "Plugin for accessing APIs.guru OpenAPI Directory.",
+  "description_for_model": "Plugin for accessing APIs.guru OpenAPI Directory. Use the list.json endpoint to find APIs. Use the metrics.json endpoint to find metadata about APIs such as counts, totals and charting data.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://api.apis.guru/v2/ai-openapi.yaml",
+    "is_user_authenticated": false
+  },
+  "logo_url": "https://api.apis.guru/logo.svg",
+  "contact_email": "mike.ralphson@gmail.com",
+  "legal_info_url": "https://apis.guru"
+}
