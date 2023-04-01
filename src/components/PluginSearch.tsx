@@ -50,6 +50,7 @@ const PluginSearch = () => {
   const router = useRouter();
 
   const handlePluginClick = (pluginName: string) => {
+    console.log("pluginName", pluginName);
     setSearchTerm(pluginName);
     setShowDropdown(false);
 

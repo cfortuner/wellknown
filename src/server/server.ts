@@ -1,3 +1,5 @@
+import axios from "axios";
+import yaml from "js-yaml";
 import fs from "fs";
 import path from "path";
 import { Plugin } from "~/types";
@@ -40,8 +42,11 @@ export const getPlugins = async (searchTerm?: string): Promise<Plugin[]> => {
         const { name, manifest } = plugin;
         let openAPI;
         try {
-          const res = await fetch(manifest.api.url);
-          openAPI = await res.json();
+          const response = await axios.get(manifest.api.url);
+
+          openAPI = isYamlString(response.data)
+            ? convertYamlToJson(response.data)
+            : response.data;
         } catch (e) {
           console.log("error", e);
         }
@@ -72,3 +77,20 @@ export const getPlugins = async (searchTerm?: string): Promise<Plugin[]> => {
 
   return plugins as Plugin[];
 };
+
+function convertYamlToJson(yamlString: string) {
+  try {
+    const jsonObj = yaml.load(yamlString);
+    return jsonObj;
+  } catch (error) {
+    console.error("Error converting YAML to JSON:", error);
+    return null;
+  }
+}
+
+function isYamlString(inputString: string) {
+  // Regular expression to match a colon followed by a space or a newline
+  const yamlPattern = /:\s|\n:/;
+
+  return yamlPattern.test(inputString);
+}
