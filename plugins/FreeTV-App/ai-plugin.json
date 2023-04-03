@@ -1,0 +1,18 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "Latest News Plugin (no auth)",
+    "name_for_model": "latest_news",
+    "description_for_human": "Plugin for getting the latest news, include breaking news and local news",
+    "description_for_model": "Plugin for getting the latest news, include breaking news and local news.",
+    "auth": {
+      "type": "none"
+    },
+    "api": {
+      "type": "openapi",
+      "url": "https://www.freetv-app.com/openapi.json",
+      "is_user_authenticated": false
+    },
+    "logo_url": "https://s3.amazonaws.com/acps-iaa/freetv/tv-landing/tv-logo.png",
+    "contact_email": "bennywen@livapp.com",
+    "legal_info_url": "bennywen@livapp.com"
+}
