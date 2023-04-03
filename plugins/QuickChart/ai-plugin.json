@@ -1,0 +1,18 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "QuickChart Plugin",
+    "name_for_model": "quickchart",
+    "description_for_human": "Plugin for generating charts and QR codes.",
+    "description_for_model": "Plugin for generating charts and QR codes.",
+    "auth": {
+      "type": "none"
+    },
+    "api": {
+      "type": "openapi",
+      "url": "https://quickchart.io/openapi.yaml",
+      "is_user_authenticated": false
+    },
+    "logo_url": "https://quickchart.io/android-chrome-512x512.png",
+    "contact_email": "support@quickchart.io",
+    "legal_info_url": "https://quickchart/terms/"
+}
