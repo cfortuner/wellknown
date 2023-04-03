@@ -29,7 +29,7 @@ const Home: NextPageWithLayout = () => {
         <div>Loading...</div>
       ) : (
         <div
-          className={`container grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5`}
+          className={`container grid grid-cols-1 gap-4 pb-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5`}
         >
           {data.plugins?.map((plugin: any) => (
             <div
@@ -43,6 +43,7 @@ const Home: NextPageWithLayout = () => {
           ))}
         </div>
       )}
+      <footer className="bg-accents-1 z-20 mt-auto flex w-full items-center justify-between border-t px-20 py-10"></footer>
     </>
   );
 };
