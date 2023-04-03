@@ -6,8 +6,6 @@ import SearchLayout from "~/components/SearchLayout";
 import { ManifestOAuthAuth, Plugin, PluginManifest } from "~/types";
 import { NextPageWithLayout } from "../_app";
 import ReactMarkdown from "react-markdown";
-import SwaggerUI from "swagger-ui-react";
-import "swagger-ui-react/swagger-ui.css";
 import { getPlugins } from "~/server/server";
 
 // Assuming you have the PluginManifest type available

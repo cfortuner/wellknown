@@ -12,7 +12,7 @@
         "url": "https://wellknown.ai/api/doc",
         "is_user_authenticated": false
     },
-    "logo_url": "https://wellknown.ai/logo.png",
+    "logo_url": "https://wellknown.ai/icon.png",
     "contact_email": "cfortuner@gmail.com",
     "legal_info_url": ""
 }
