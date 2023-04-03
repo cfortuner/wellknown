@@ -1,0 +1,19 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "SchoolDigger School Data Plugin",
+    "name_for_model": "schooldigger",
+    "description_for_human": "Get detailed data on over 120,000 K-12 schools and 18,500 districts in the United States.",
+    "description_for_model": "Get detailed data on over 120,000 K-12 schools and 18,500 districts in the United States.",
+    "auth": {
+      "type": "user_http",
+      "authorization_type": "bearer"
+    },
+    "api": {
+      "type": "openapi",
+      "url": "https://api.schooldigger.com/swagger/docs/v2.0",
+      "is_user_authenticated": true
+    },
+    "logo_url": "https://www.schooldigger.com/images/logo-medium.png",
+    "contact_email": "contact@schooldigger.com",
+    "legal_info_url": "https://www.schooldigger.com/termsofuse.aspx"
+}
