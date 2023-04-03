@@ -1,0 +1,19 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "Screenshot by Urlbox",
+    "name_for_model": "screenshot",
+    "description_for_human": "Render HTML to an image or ask to see the web page of any URL or organisation.",
+    "description_for_model": "Plugin for capturing or rendering screenshots of any website from a URL or HTML. The plugin returns image screenshots in various formats such as png, jpeg, and webp. It can also be used to return a PDF from a URL, or a vector screenshot in SVG format. It can even return a scrolling video of a web page in mp4 or webm formats, but it is advised to enable the gpu option when requesting these formats. The plugin also allows you to extract metadata from a URL. It can be used to simply return the rendered HTML, including the javascript. The plugin can also convert HTML to PDF.",
+    "auth": {
+      "type": "user_http",
+      "authorization_type": "bearer"
+    },
+    "api": {
+      "type": "openapi",
+      "url": "https://www.urlbox.io/.well-known/open-api.yaml",
+      "is_user_authenticated": false
+    },
+    "logo_url": "https://www.urlbox.io/logos/logo4.png",
+    "contact_email": "support@urlbox.io",
+    "legal_info_url": "https://www.urlbox.io/legal"
+}
