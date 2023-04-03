@@ -1,0 +1,18 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "Wellknown",
+    "name_for_model": "wellknown",
+    "description_for_human": "Search for AI Plugins using Wellknown's registry.",
+    "description_for_model": "Search for AI Plugins using Wellknown's registry.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "https://wellknown.ai/api/doc",
+        "is_user_authenticated": false
+    },
+    "logo_url": "https://wellknown.ai/logo.png",
+    "contact_email": "cfortuner@gmail.com",
+    "legal_info_url": ""
+}

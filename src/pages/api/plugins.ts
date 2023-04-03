@@ -1,6 +1,15 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getPlugins } from "~/server/server";
 
+/**
+ * @swagger
+ * /api/plugins:
+ *   get:
+ *     description: Returns a list of Wellknown ai-plugins json objects from the Wellknown ai-plugins registry.
+ *     responses:
+ *       200:
+ *         description: A list of Wellknown ai-plugins json objects.
+ */
 export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
   const searchTerm = req.query.search as string;
