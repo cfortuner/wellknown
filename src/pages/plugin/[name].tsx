@@ -7,6 +7,8 @@ import { ManifestOAuthAuth, Plugin, PluginManifest } from "~/types";
 import { NextPageWithLayout } from "../_app";
 import ReactMarkdown from "react-markdown";
 import { getPlugins } from "~/server/server";
+import SwaggerUI from "swagger-ui-react";
+import "swagger-ui-react/swagger-ui.css";
 
 // Assuming you have the PluginManifest type available
 interface PluginPageProps {
@@ -21,6 +23,11 @@ const PluginPage: NextPageWithLayout<PluginPageProps> = ({ plugin }) => {
   const [activeTab, setActiveTab] = useState("plugin");
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
+  };
+
+  const [showRaw, setShowRaw] = useState(false);
+  const handleShowRawClick = () => {
+    setShowRaw(!showRaw);
   };
 
   return (
@@ -64,28 +71,37 @@ const PluginPage: NextPageWithLayout<PluginPageProps> = ({ plugin }) => {
       {activeTab === "openapi" && (
         <div>
           <div className="py-2">OpenAPISpec</div>
-          <div className="border-2">
-            {/* <SwaggerUI
-              requestInterceptor={async (req) => {
-                if (req.url.startsWith("/api/proxy?url=")) {
-                  return req;
-                }
+          <div className="overflow-auto border-2 p-4">
+            <button
+              onClick={handleShowRawClick}
+              className="daisy-btn-primary daisy-btn-sm daisy-btn"
+            >
+              {showRaw ? "Hide Raw" : "Show Raw"}
+            </button>
+            {showRaw ? (
+              <ReactMarkdown className="">
+                {"```\n" +
+                  JSON.stringify(plugin.openAPI || {}, null, 2) +
+                  "\n```"}
+              </ReactMarkdown>
+            ) : (
+              <SwaggerUI
+                requestInterceptor={async (req) => {
+                  if (req.url.startsWith("/api/proxy?url=")) {
+                    return req;
+                  }
 
-                // need to send the request to my proxy url
-                req.url = `/api/proxy?url=${encodeURIComponent(req.url)}`;
-                return req;
-              }}
-              url={`/api/proxy?url=${encodeURIComponent(
-                plugin.manifest.api.url
-              )}`}
-              docExpansion="full"
-              defaultModelsExpandDepth={0}
-            /> */}
-            <ReactMarkdown className="overflow-auto border-2 p-4">
-              {"```\n" +
-                JSON.stringify(plugin.openAPI || {}, null, 2) +
-                "\n```"}
-            </ReactMarkdown>
+                  // need to send the request to my proxy url
+                  req.url = `/api/proxy?url=${encodeURIComponent(req.url)}`;
+                  return req;
+                }}
+                url={`/api/proxy?url=${encodeURIComponent(
+                  plugin.manifest.api.url
+                )}`}
+                docExpansion="full"
+                defaultModelsExpandDepth={0}
+              />
+            )}
           </div>
         </div>
       )}
