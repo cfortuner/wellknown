@@ -1,0 +1,19 @@
+{
+  "schema_version": "v1",
+  "name_for_model": "retrieval",
+  "name_for_human": "OpenIndex Retrieval Plugin",
+  "description_for_model": "Plugin for searching through documents publicly listed on OpenIndex and the user's private documents to find answers to questions and retrieve relevant information. Use it whenever a user asks something about financial documents, regulations, law.",
+  "description_for_human": "Search through documents and websites indexed on OpenIndex.ai",
+  "auth": {
+    "type": "user_http",
+    "authorization_type": "bearer"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://retriever.openindex.ai/.well-known/openapi.yaml",
+    "has_user_authentication": false
+  },
+  "logo_url": "https://retriever.openindex.ai/.well-known/logo.png",
+  "contact_email": "hello@openindex.ai", 
+  "legal_info_url": "legal@openindex.ai"
+}
