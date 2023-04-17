@@ -1,0 +1,25 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "GitHub [UNOFFICIAL] Plugin",
+    "name_for_model": "github_repo_interaction",
+    "description_for_human": "Plugin for interacting with GitHub repositories, accessing file structures, and modifying code. @albfresco for support.",
+    "description_for_model": "This plugin allows you to interact with GitHub repositories, access file structures, modify code, and discuss code implementation. Use keywords like 'fetch file contents', 'propose code changes', and 'discuss code implementation' to get the most out of this plugin. No authentication is needed.",
+    "auth": {
+        "type": "oauth",
+        "client_url": "https://gh-plugin.teammait.com/",
+        "scope": "repo",
+        "authorization_url": "https://gh-plugin.teammait.com/api/token",
+        "authorization_content_type": "application/json",
+        "verification_tokens": {
+            "openai": "5f11e1ad9ed14c8688ca334ce98ebed7"
+        }
+    },
+    "api": {
+        "type": "openapi",
+        "url": "https://gh-plugin.teammait.com/.well-known/openapi.yaml",
+        "is_user_authenticated": false
+    },
+    "logo_url": "https://gh-plugin.teammait.com/logo.png",
+    "contact_email": "albs@teammait.com",
+    "legal_info_url": "https://gh-plugin.teammait.com/terms"
+}
