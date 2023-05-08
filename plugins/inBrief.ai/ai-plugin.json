@@ -1,0 +1,19 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "inBrief.ai plugin",
+    "name_for_model": "inbrief",
+    "description_for_human": "Plugin to summarize artiles, podcasts, YouTube videos and pdfs",
+    "description_for_model": "Plugin to summarize artiles, podcasts, YouTube videos and pdfs, by giving URL",
+    "auth": {
+      "type": "user_http",
+      "authorization_type": "bearer"
+    },
+    "api": {
+      "type": "openapi",
+      "url": "https://chatgpt-plugin.inbrief.ai/openapi.yaml",
+      "is_user_authenticated": false
+    },
+    "logo_url": "https://chatgpt-plugin.inbrief.ai/logo.png",
+    "contact_email": "abhi@gameb.ca",
+    "legal_info_url": "https://www.inbrief.ai/legal"
+  }
